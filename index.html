@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang=en>
+  <head>
+    <meta charset=utf-8>
+    <link rel="manifest" href="manifest.json" />
+    <title>PWA Test</title>
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <p>PWA Test</p>
+    <input type="button" value="Get a number" onclick="dice()" id="getDiceButton">
+    <div id="number"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+          window.addEventListener("load", function() {
+              console.log("hello");
+              navigator.serviceWorker.register("./sw.js").then(registration => {
+                  console.log("Serviceworker registration successful.");
+              }).catch(err => {
+                  console.log("ServiceWorker registration failed.", err);
+              });
+          });
+      }
+    </script>
+  </body>
+</html>
