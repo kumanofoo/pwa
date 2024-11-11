@@ -1,7 +1,7 @@
 const bclock = () => {
   const d = new Date();
   let year = d.getFullYear();
-  let month = ('00' + d.getMonth()).slice(-2);
+  let month = ('00' + (d.getMonth()+1)).slice(-2);
   let date = ('00' + d.getDate()).slice(-2);
   let day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][d.getDay()];
   let hour = ('00' + d.getHours()).slice(-2);
