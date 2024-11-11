@@ -5,21 +5,21 @@
     <link rel="manifest" href="manifest.json" />
     <title>PWA Test</title>
     <script src="app.js"></script>
+    <script src="js/bclock.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="container">
-      <div class="clock">
-        <p class="clock-date"></p>
-        <p class="clock-time"></p>
-        <p><input type="button" id="sleep" value="Wake Lock is disabled"></p>
+      <div class="bclock">
+        <p class="bclock-date"></p>
+        <p class="bclock-time"></p>
+        <p><input type="button" id="sleep" value="Wake Lock"></p>
       </div>
     </div>
     <script>
       if ("serviceWorker" in navigator) {
           window.addEventListener("load", function() {
-              console.log("hello");
               navigator.serviceWorker.register("./sw.js").then(registration => {
                   console.log("Serviceworker registration successful.");
               }).catch(err => {
@@ -34,34 +34,17 @@
           if (!wakeLockEnabled) {
               noSleep.enable();
               wakeLockEnabled = true;
-              toggleEl.value="Wake Lock is enabled";
-              //document.body.style.backgroundColor = "green";
+              //toggleEl.value="Wake Lock is enabled";
+              toggleEl.style.color="#daf6ff";
+              toggleEl.style.textShadow="0 0 20px #0aafe6";
           } else {
               noSleep.disable();
               wakeLockEnabled = false;
-              toggleEl.value="Wake Lock is disabled";
-              //document.body.style.backgroundColor = "";
+              //toggleEl.value="Wake Lock is disabled";
+              toggleEl.style.color="#618686";
+              toggleEl.style.textShadow="";
           }
       }, false);
-      
-      const clock = () => {
-        const d = new Date();
-        let year = d.getFullYear();
-        let month = ('00' + d.getMonth()).slice(-2);
-        let date = ('00' + d.getDate()).slice(-2);
-        let day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"][d.getDay()];
-        let hour = ('00' + d.getHours()).slice(-2);
-        let min = ('00' + d.getMinutes()).slice(-2);
-        let sec = ('00' + d.getSeconds()).slice(-2);
-        
-        let today = `${year}.${month}.${date} ${day}`;
-        let time = `${hour}:${min}:${sec}`;
-        
-        document.querySelector(".clock-date").innerText = today;
-        document.querySelector(".clock-time").innerText = time;
-      }
-
-      setInterval(clock, 1000);
     </script>
   </body>
 </html>
