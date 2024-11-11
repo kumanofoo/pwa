@@ -37,13 +37,19 @@
               //toggleEl.value="Wake Lock is enabled";
               toggleEl.style.color="#daf6ff";
               toggleEl.style.textShadow="0 0 20px #0aafe6";
+              if (!document.fullscreenElement) {
+		  document.documentElement.requestFullscreen();
+              }
           } else {
               noSleep.disable();
               wakeLockEnabled = false;
               //toggleEl.value="Wake Lock is disabled";
               toggleEl.style.color="#618686";
               toggleEl.style.textShadow="";
-          }
+              if (document.exitFullscreen) {
+		  document.exitFullscreen();
+              }
+	  }
       }, false);
     </script>
   </body>
