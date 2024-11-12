@@ -46,11 +46,14 @@
               //toggleEl.value="Wake Lock is disabled";
               toggleEl.style.color="#618686";
               toggleEl.style.textShadow="";
-              if (document.exitFullscreen) {
+              if (document.fullscreenElement) {
 		  document.exitFullscreen();
               }
 	  }
       }, false);
+      if (!document.fullscreenEnabled) {
+        toggleEl.value="Wake*Lock";
+      }
     </script>
   </body>
 </html>
