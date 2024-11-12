@@ -51,8 +51,11 @@
               }
 	  }
       }, false);
-      if (!document.fullscreenEnabled) {
+      if ("wakeLock" in navigator) {
         toggleEl.value="Wake*Lock";
+      }
+      else {
+        toggleEl.value="Wake+Lock";
       }
     </script>
   </body>
