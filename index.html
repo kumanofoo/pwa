@@ -4,7 +4,7 @@
     <meta charset=utf-8>
     <link rel="manifest" href="manifest.json" />
     <title>PWA Test</title>
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
     <script src="js/bclock.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nosleep/0.12.0/NoSleep.min.js"></script>
     <link rel="stylesheet" href="style.css" />
@@ -15,6 +15,12 @@
         <p class="bclock-date"></p>
         <p class="bclock-time"></p>
         <p><input type="button" id="sleep" value="Wake Lock"></p>
+        <p><button data-status="off">Turn Wake Lock ON</button></p>
+        <section id="status">
+          Wake Lock status
+          <p></p>
+        </section>
+        <p><input type="checkbox" id="reaquire" /></p>
       </div>
     </div>
     <script>
@@ -31,25 +37,25 @@
       var wakeLockEnabled = false;
       var toggleEl = document.querySelector("#sleep");
       toggleEl.addEventListener('click', function() {
-          if (!wakeLockEnabled) {
-              noSleep.enable();
-              wakeLockEnabled = true;
-              //toggleEl.value="Wake Lock is enabled";
-              toggleEl.style.color="#daf6ff";
-              toggleEl.style.textShadow="0 0 20px #0aafe6";
-              if (!document.fullscreenElement) {
-		  document.documentElement.requestFullscreen();
-              }
-          } else {
-              noSleep.disable();
-              wakeLockEnabled = false;
-              //toggleEl.value="Wake Lock is disabled";
-              toggleEl.style.color="#618686";
-              toggleEl.style.textShadow="";
-              if (document.fullscreenElement) {
-		  document.exitFullscreen();
-              }
-	  }
+        if (!wakeLockEnabled) {
+          noSleep.enable();
+          wakeLockEnabled = true;
+          //toggleEl.value="Wake Lock is enabled";
+          toggleEl.style.color="#daf6ff";
+          toggleEl.style.textShadow="0 0 20px #0aafe6";
+          if (!document.fullscreenElement) {
+		        document.documentElement.requestFullscreen();
+          }
+        } else {
+          noSleep.disable();
+          wakeLockEnabled = false;
+          //toggleEl.value="Wake Lock is disabled";
+          toggleEl.style.color="#618686";
+          toggleEl.style.textShadow="";
+          if (document.fullscreenElement) {
+		          document.exitFullscreen();
+          }
+	      }
       }, false);
       if ("wakeLock" in navigator) {
         toggleEl.value="Wake*Lock";
